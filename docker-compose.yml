@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8088:80
+    image: app:mydjangoapp
+    container_name: mydjangoapp_container102
+    #command: python manage.py runserver 127.0.0.1:8003
+    command: python manage.py runserver 0.0.0.0:80
+    restart: always
+    volumes:
+      - .:/mydjangoapp
+    networks:
+      - djangonetwork
+    depends_on:
+      - mysql
+  mysql:
+    image: arm64v8/mysql:oracle
+    volumes:
+      - ./data/mysql/db:/var/lib/mysql
+    restart: always
+    ports:
+      - 5106:3306
+    environment:
+      MYSQL_DATABASE: django-app-db
+#      MYSQL_PASSWORD: myLocalAdminPassRoot22
+      MYSQL_ROOT_PASSWORD: myLocalAdminPassRoot22
+    networks:
+      - djangonetwork
+  phpmyadmin:
+    depends_on:
+      - mysql
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8019:80
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: myLocalAdminPassRoot22
+    networks:
+      - djangonetwork
+networks:
+  djangonetwork:
+volumes:
+  db:
