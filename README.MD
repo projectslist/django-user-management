@@ -32,9 +32,9 @@ The following endpoints are available:
 # Installation
 - Clone the repository:
 
-``git clone https://github.com/projectslist/DjangoUserManagement.git
-cd project
+- ``git clone https://github.com/projectslist/django-user-management.git
 ``
+- ``cd project``
 
 - Install the dependencies
 - ``pip install -r requirements.txt
