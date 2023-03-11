@@ -18,7 +18,7 @@ from joblib import load
 class RegisterViewTest(APITestCase):
 
     def test_register_user(self):
-        url = 'http://localhost:8088/api/v1/register' # Replace with your URL
+        url = reverse('register')
 
         data = {
             "first_name": "testuser",
@@ -43,7 +43,7 @@ class LoginViewTest(APITestCase):
 
     def test_login_user(self):
 
-        url = 'http://localhost:8088/api/v1/login'
+        url = reverse('login')
         data = {
             'email': 'testuser@testuser.com',
             'password': 'testpassword'
