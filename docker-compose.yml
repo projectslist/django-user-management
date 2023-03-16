@@ -9,7 +9,6 @@ services:
       - 8088:80
     image: app:mydjangoapp
     container_name: mydjangoapp_container102
-    #command: python manage.py runserver 127.0.0.1:8003
     command: python manage.py runserver 0.0.0.0:80
     restart: always
     volumes:
@@ -27,8 +26,7 @@ services:
       - 5106:3306
     environment:
       MYSQL_DATABASE: django-app-db
-#      MYSQL_PASSWORD: myLocalAdminPassRoot22
-      MYSQL_ROOT_PASSWORD: myLocalAdminPassRoot22
+      MYSQL_ROOT_PASSWORD: yourMySqlPassword
     networks:
       - djangonetwork
   phpmyadmin:
@@ -40,7 +38,7 @@ services:
       - 8019:80
     environment:
       PMA_HOST: mysql
-      MYSQL_ROOT_PASSWORD: myLocalAdminPassRoot22
+      MYSQL_ROOT_PASSWORD: yourMySqlPassword
     networks:
       - djangonetwork
 networks:
